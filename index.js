@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 
-app.get("/api/data", (req, res) => {
+app.get("/", (req, res) => {
   const data = [
     { id: 1, name: "Objeto 1" },
     { id: 2, name: "Objeto 2" },
