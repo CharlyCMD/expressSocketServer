@@ -134,6 +134,7 @@ io.on("connection", (socket) => {
 
   socket.on("resetGame", (roomName) => {
     const room = rooms.get(roomName);
+
     if (room) {
       turnPlayer1 = true;
       turnPlayer2 = false;
