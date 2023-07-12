@@ -122,6 +122,7 @@ io.on("connection", (socket) => {
         "message",
         "El room está lleno. Por favor, intenta más tarde."
       );
+
       // socket.disconnect(true);
     }
   });
