@@ -71,8 +71,8 @@ io.on("connection", (socket) => {
     socket.join(roomName);
     console.log(`Jugador se unió al room: ${roomName}`);
 
-    const currentRoom = io.sockets.adapter.rooms.get(roomName);
-    const numPlayers = currentRoom ? currentRoom.size : 0;
+    // const currentRoom = io.sockets.adapter.rooms.get(roomName);
+    // const numPlayers = currentRoom ? currentRoom.size : 0;
 
     // let p1 = rooms.get("player1");
     // let p2 = rooms.get("player2");
@@ -232,7 +232,7 @@ io.on("connection", (socket) => {
   socket.on("leaveRoom", ({ currentRoom, player }) => {
     const room = rooms.get(currentRoom);
     room[player] = null;
-    socket.leave(currentRoom);
+    // socket.leave(currentRoom);
     turnPlayer1 = true;
     turnPlayer2 = false;
     board = Array(9).fill(null);
@@ -272,7 +272,6 @@ io.on("connection", (socket) => {
 
   socket.on("resetGame", (roomName) => {
     const room = rooms.get(roomName);
-
     if (room) {
       turnPlayer1 = true;
       turnPlayer2 = false;
