@@ -124,9 +124,11 @@ io.on("connection", (socket) => {
 
   socket.on("leaveRoom", ({ currentRoom }) => {
     const primerRoom = rooms.get(currentRoom);
-    primerRoom.player1.socket.emit("clearGame", "limpiando juego");
-    primerRoom.player2.socket.emit("clearGame", "limpiando juego");
-    rooms.delete(currentRoom);
+    if (primerRoom) {
+      primerRoom?.player1?.socket?.emit("clearGame", "limpiando juego");
+      primerRoom?.player2?.socket?.emit("clearGame", "limpiando juego");
+      rooms.delete(currentRoom);
+    }
   });
 
   socket.on("playerEvent", ({ roomName, turn, index, winner }) => {
