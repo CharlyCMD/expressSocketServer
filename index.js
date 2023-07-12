@@ -157,27 +157,19 @@ io.on("connection", (socket) => {
 
   socket.on("resetGame", (roomName) => {
     const room = rooms.get(roomName);
+    console.log({ room });
     if (room) {
-      room.player1 = {
-        socket,
-        activeTurn: true,
-        turn: "🦖",
-        playerType: "player1",
-      };
-      room.player2 = {
-        socket,
-        activeTurn: false,
-        turn: "🎸",
-        playerType: "player2",
-      };
-      (room.board = Array(9).fill(null)), rooms.set(roomName, room);
+      room.player1.activeTurn = true;
+      room.player2.activeTurn = false;
+      room.board = Array(9).fill(null);
+      rooms.set(roomName, room);
 
-      room.player1.emit("changingTurns", {
+      room?.player1?.socket?.emit("changingTurns", {
         turnState: room.player1.activeTurn,
         board: room.board,
       });
 
-      room.player2.emit("changingTurns", {
+      room?.player2?.socket?.emit("changingTurns", {
         turnState: room.player2.activeTurn,
         board: room.board,
       });
