@@ -29,40 +29,40 @@ app.get("/", (req, res) => {
   res.json(data);
 });
 
-// let turnPlayer1 = true;
-// let turnPlayer2 = false;
+let turnPlayer1 = true;
+let turnPlayer2 = false;
 
-// let board = Array(9).fill(null);
+let board = Array(9).fill(null);
 
-// const updateBoard = ({ index, turn, winner }) => {
-//   if (board[index] || winner) {
-//     return false;
-//   }
-//   board[index] = turn;
-//   return true;
-// };
+const updateBoard = ({ index, turn, winner }) => {
+  if (board[index] || winner) {
+    return false;
+  }
+  board[index] = turn;
+  return true;
+};
 
-// const changeTurns = () => {
-//   turnPlayer1 = !turnPlayer1;
-//   turnPlayer2 = !turnPlayer2;
-// };
+const changeTurns = () => {
+  turnPlayer1 = !turnPlayer1;
+  turnPlayer2 = !turnPlayer2;
+};
 
-// const handleUpdateBoard = ({ index, turn, winner, room }) => {
-//   const isValidSelection = updateBoard({ index, turn, winner });
-//   if (isValidSelection) {
-//     changeTurns();
-//     room.player1.emit("changingTurns", {
-//       turnState: turnPlayer1,
-//       board: board,
-//     });
-//     room.player2.emit("changingTurns", {
-//       turnState: turnPlayer2,
-//       board: board,
-//     });
-//   }
-// };
+const handleUpdateBoard = ({ index, turn, winner, room }) => {
+  const isValidSelection = updateBoard({ index, turn, winner });
+  if (isValidSelection) {
+    changeTurns();
+    room.player1.emit("changingTurns", {
+      turnState: turnPlayer1,
+      board: board,
+    });
+    room.player2.emit("changingTurns", {
+      turnState: turnPlayer2,
+      board: board,
+    });
+  }
+};
 
-// const rooms = new Map(); // Mapa para almacenar los rooms y sus jugadores
+const rooms = new Map(); // Mapa para almacenar los rooms y sus jugadores
 
 // io.on("connection", (socket) => {
 //   socket.emit("welcome", "¡Bienvenido al servidor Socket.io! Lluvia");
