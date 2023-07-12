@@ -168,16 +168,16 @@ io.on("connection", (socket) => {
   //   }
   // });
 
-  // socket.on("playerEvent", ({ roomName, turn, index, winner }) => {
-  //   const room = rooms.get(roomName);
-  //   if (room) {
-  //     if (room.player1 === socket) {
-  //       handleUpdateBoard({ index, turn, winner, room });
-  //     } else if (room.player2 === socket) {
-  //       handleUpdateBoard({ index, turn, winner, room });
-  //     }
-  //   }
-  // });
+  socket.on("playerEvent", ({ roomName, turn, index, winner }) => {
+    const room = rooms.get(roomName);
+    if (room) {
+      if (room.player1 === socket) {
+        handleUpdateBoard({ index, turn, winner, room });
+      } else if (room.player2 === socket) {
+        handleUpdateBoard({ index, turn, winner, room });
+      }
+    }
+  });
 
   // socket.on("resetGame", (roomName) => {
   //   const room = rooms.get(roomName);
