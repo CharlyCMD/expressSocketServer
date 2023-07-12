@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 
 const server = http.createServer(app);
+
 const io = socketIO(server, {
   cors: {
     origin: "*", // Cambia esto a la URL permitida de tu aplicación cliente
