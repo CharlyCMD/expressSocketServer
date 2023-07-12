@@ -175,6 +175,7 @@ io.on("connection", (socket) => {
         turnState: room.player1.activeTurn,
         board: room.board,
       });
+
       room.player2.emit("changingTurns", {
         turnState: room.player2.activeTurn,
         board: room.board,
