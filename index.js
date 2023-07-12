@@ -77,6 +77,7 @@ io.on("connection", (socket) => {
     const numPlayers = currentRoom ? currentRoom.size : 0;
     if (numPlayers === 1) {
       // Primer jugador en unirse al room
+
       rooms.set(roomName, {
         player1: socket,
         player2: null,
