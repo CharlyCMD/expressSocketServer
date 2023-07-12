@@ -179,24 +179,24 @@ io.on("connection", (socket) => {
     }
   });
 
-  // socket.on("resetGame", (roomName) => {
-  //   const room = rooms.get(roomName);
+  socket.on("resetGame", (roomName) => {
+    const room = rooms.get(roomName);
 
-  //   if (room) {
-  //     turnPlayer1 = true;
-  //     turnPlayer2 = false;
-  //     board = Array(9).fill(null);
-  //     room.player1.emit("changingTurns", {
-  //       turnState: turnPlayer1,
-  //       board: board,
-  //     });
+    if (room) {
+      turnPlayer1 = true;
+      turnPlayer2 = false;
+      board = Array(9).fill(null);
+      room.player1.emit("changingTurns", {
+        turnState: turnPlayer1,
+        board: board,
+      });
 
-  //     room.player2.emit("changingTurns", {
-  //       turnState: turnPlayer2,
-  //       board: board,
-  //     });
-  //   }
-  // });
+      room.player2.emit("changingTurns", {
+        turnState: turnPlayer2,
+        board: board,
+      });
+    }
+  });
 });
 
 server.listen(port, () => {
