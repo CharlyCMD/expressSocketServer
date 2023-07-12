@@ -1,5 +1,6 @@
 const http = require("http");
 const socketIO = require("socket.io");
+// const port = require("./config");
 const express = require("express");
 const cors = require("cors");
 
@@ -7,7 +8,6 @@ const app = express();
 app.use(cors());
 
 const server = http.createServer(app);
-
 const io = socketIO(server, {
   cors: {
     origin: "*", // Cambia esto a la URL permitida de tu aplicación cliente
@@ -17,7 +17,6 @@ const io = socketIO(server, {
 });
 
 const port = process.env.PORT || 3000;
-
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -28,14 +27,6 @@ app.get("/", (req, res) => {
   ];
 
   res.json(data);
-});
-
-io.on("connection", (socket) => {
-  socket.emit("welcome", "¡Bienvenido al servidor Socket.io! Lluvia");
-});
-
-server.listen(port, () => {
-  console.log(`API escuchando en el puerto ${port}`);
 });
 
 const rooms = new Map(); // Mapa para almacenar los rooms y sus jugadores
@@ -143,6 +134,7 @@ io.on("connection", (socket) => {
 
   socket.on("resetGame", (roomName) => {
     const room = rooms.get(roomName);
+
     if (room) {
       turnPlayer1 = true;
       turnPlayer2 = false;
@@ -151,6 +143,7 @@ io.on("connection", (socket) => {
         turnState: turnPlayer1,
         board: board,
       });
+
       room.player2.emit("changingTurns", {
         turnState: turnPlayer2,
         board: board,
