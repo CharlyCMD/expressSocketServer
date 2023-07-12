@@ -144,29 +144,29 @@ io.on("connection", (socket) => {
     }
   });
 
-  // socket.on("leaveRoom", ({ currentRoom, player }) => {
-  //   const room = rooms.get(currentRoom);
-  //   room[player] = null;
-  //   // socket.leave(currentRoom);
-  //   turnPlayer1 = true;
-  //   turnPlayer2 = false;
-  //   board = Array(9).fill(null);
-  //   // if (room?.player1 === null && room?.player2 === null) {
-  //   //   console.log("deberiamos de borrar el room", rooms);
-  //   //   return;
-  //   // }
-  //   if (player === "player1") {
-  //     room?.player2?.emit("changingTurns", {
-  //       turnState: turnPlayer2,
-  //       board: board,
-  //     });
-  //   } else {
-  //     room?.player1?.emit("changingTurns", {
-  //       turnState: turnPlayer1,
-  //       board: board,
-  //     });
-  //   }
-  // });
+  socket.on("leaveRoom", ({ currentRoom, player }) => {
+    const room = rooms.get(currentRoom);
+    room[player] = null;
+    // socket.leave(currentRoom);
+    turnPlayer1 = true;
+    turnPlayer2 = false;
+    board = Array(9).fill(null);
+    // if (room?.player1 === null && room?.player2 === null) {
+    //   console.log("deberiamos de borrar el room", rooms);
+    //   return;
+    // }
+    if (player === "player1") {
+      room?.player2?.emit("changingTurns", {
+        turnState: turnPlayer2,
+        board: board,
+      });
+    } else {
+      room?.player1?.emit("changingTurns", {
+        turnState: turnPlayer1,
+        board: board,
+      });
+    }
+  });
 
   socket.on("playerEvent", ({ roomName, turn, index, winner }) => {
     const room = rooms.get(roomName);
