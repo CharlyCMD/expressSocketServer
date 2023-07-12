@@ -94,6 +94,7 @@ io.on("connection", (socket) => {
     } else if (numPlayers === 2) {
       // Segundo jugador en unirse al room
       const room = rooms.get(roomName);
+
       room.player2 = socket;
 
       rooms.set(roomName, room);
